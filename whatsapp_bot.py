@@ -20,7 +20,7 @@ x=" "
 def bot():
     x=entry.get()
     def get_text():
-        #driver.set_window_position(0,-2000)
+        driver.set_window_position(0,-2000)
         
         
         #driver.find_element_by_xpath('//span[@title= "{}"]'.format('+91 88263 00206')).click()
@@ -39,8 +39,6 @@ def bot():
         
         
         def txtfunc(t):
-            
-            
             
             
             def dele(z1):
@@ -73,7 +71,7 @@ def bot():
                 driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys('Shutting Down')
                 driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[3]').click()
 
-                os.system("shutdown /s /t 1");
+                #os.system("shutdown /s /t 1");
             """def navigate():
                 global path
                 
@@ -119,7 +117,7 @@ def bot():
 
 
             def helloseq():
-                driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys('Hey there user! \n What would you like to do today?\n select from the list below \n 1) To Delete a file fro your get folder send Delete space name of file you want to delete\n 2) To take a picture using webcam of the laptop send Photo \n 3) To shutdown the laptop send Shutdown \n 4) To view your files in get folder send Show files\n 5) To get a file from your Get folder send Get space name of your file \n 6) To close the program send Exit \n')
+                driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys('Hey there user! \n What would you like to do today?\n select from the list below \n 1) To view your files in get folder send Show \n 2)  To get a file from your Get folder send Get space name of your file \n 3) To Delete a file from your get folder send Delete space name of file you want to delete  \n 4) To take a picture using webcam of the laptop send Photo\n 5) To close the program send Exit \n 6) To shutdown the laptop send Shutdown \n')
                 
             def close():
                 sys.exit()
@@ -153,7 +151,7 @@ def bot():
                             z1=str(txt).split(' ')[1:][0]
                             dele(z1)
                         except:
-                            driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys("can't delete this item")
+                            driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys("can't delete this item maybe it doesnt exist or you dont have permission to delete it")
                             driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[3]').click()
                             
                             
@@ -168,7 +166,7 @@ def bot():
 
                     elif(txt=="Shutdown" and count>0):
                         shutdown()
-                    elif(txt=="Show files" or txt=="show files" and count>0):
+                    elif(txt=="Show" or txt=="show" and count>0):
                         driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys("Here are all the files i your get folder")
                         driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[3]').click()
                         
@@ -183,7 +181,7 @@ def bot():
                             z=str(txt).split(' ')[1:][0]
                             get(z)
                         except:
-                            driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys("couldnt find the item. Remember the program is case sensitive")
+                            driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys("couldnt find the item. or maybe file size is too large. Remember the program is case sensitive")
                             driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[3]').click()
                         sleep(2)
                         get_text()
@@ -210,6 +208,7 @@ def bot():
     def exit():
         root.destroy()
         
+        
    
     l1=Label(root,text='press continue after scanning QR code',width='50')
     l1.grid(row=0,column=0)
@@ -219,7 +218,7 @@ def bot():
     chrome_options.add_argument("--disable-notifications")
     #chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-gpu");
-    driver = webdriver.Chrome("D:/python/chromedriver.exe",chrome_options=chrome_options)
+    driver = webdriver.Chrome("chromedriver.exe",chrome_options=chrome_options)
     root.lift()
     driver.get('https://web.whatsapp.com/')
     sleep(2)
@@ -231,7 +230,7 @@ root=Tk()
 
 root.minsize(200,100)
 
-l=Label(root,text='welcome to python bot enter your mob. no.',width='30')
+l=Label(root,text='welcome to python bot enter your mob. no.',width='50')
 entry=Entry(root,width=50,borderwidth=5)#try
 l.grid(row=0,column=0)
 bt=Button(root,text='START',command=lambda: [bot()])
