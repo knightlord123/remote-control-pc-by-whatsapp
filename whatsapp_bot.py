@@ -18,18 +18,18 @@ x=" "
 
 
 def bot():
-    x=entry.get()
+    mobile=entry.get()
     def get_text():
-        driver.set_window_position(0,-2000)
+        driver.set_window_position(0,-2000)  #window size adjust 
         
         
-        #driver.find_element_by_xpath('//span[@title= "{}"]'.format('+91 88263 00206')).click()
+        #driver.find_element_by_xpath('//span[@title= "{}"]'.format('mobile no.')).click()                      #add your mobile no. here  
         
         
-        driver.find_element_by_xpath('//*[@id="side"]/div[1]/div/label/div/div[2]').send_keys(x)
+        driver.find_element_by_xpath('//*[@id="side"]/div[1]/div/label/div/div[2]').send_keys(mobile) 
         sleep(1)
         #driver.find_element_by_xpath('//*[@id="pane-side"]/div[1]/div/div/div[2]/div/div/div[2]').click()
-        driver.find_element_by_class_name('_3j7s9').click()
+        driver.find_element_by_class_name('_3j7s9').click()   #select the searched mobile no. ps class name needs to be updated after few weeks
         sleep(1)
         
         flag=0
@@ -41,7 +41,7 @@ def bot():
         def txtfunc(t):
             
             
-            def dele(z1):
+            def dele(z1):#delete a file in the get folder
                 w="D:\\python\\Whatsapp Bot\\get\\"+str(z1)
                 os.chmod(w, 0o777)
                 os.remove(w)
@@ -50,7 +50,7 @@ def bot():
                 driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[3]').click()
                 show()
                 
-            def photo():
+            def photo():#capture a photo using pc's webcam
                 video_capture = cv2.VideoCapture(0)
                 # Check success
                 if not video_capture.isOpened():
@@ -67,7 +67,7 @@ def bot():
                 driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div[1]/span/div/div[2]/div/div[3]/div[1]/div[2]').send_keys("here is your photo")
                 
                 driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span/div/div').click()
-            def shutdown():
+            def shutdown():#shutdown pc remotely
                 driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys('Shutting Down')
                 driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[3]').click()
 
@@ -93,7 +93,7 @@ def bot():
                 driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys('keep entering name of file ypu want to open \n c drive or d drive? ')
                 driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[3]').click()
                 navfurther("c drive or d drive?","")"""
-            def show():
+            def show():#view all files in get folder
                 a=os.listdir("D:\\python\\Whatsapp Bot\\get")
                 print (a)
                 #driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys("Here are all the files i your get folder")
@@ -101,10 +101,10 @@ def bot():
                 for i in a:
                     driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys(i)
                     driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[3]').click()
-            def get(z):
-                p1="D:\\python\\Whatsapp Bot\\get\\"+str(z)
+            def get(filename):#sends files to whatsapp
+                file="D:\\python\\Whatsapp Bot\\get\\"+str(filename)
                 driver.find_element_by_xpath('//*[@id="main"]/header/div[3]/div/div[2]/div').click()
-                driver.find_element_by_xpath('//*[@id="main"]/header/div[3]/div/div[2]/span/div/div/ul/li[3]/button/input').send_keys(p1)
+                driver.find_element_by_xpath('//*[@id="main"]/header/div[3]/div/div[2]/span/div/div/ul/li[3]/button/input').send_keys(file)#can be used to send text as well as files in whatsapp
                 sleep(5)
                 driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span/div/div').click()
 
@@ -135,7 +135,7 @@ def bot():
                 
                                                 
                 
-                time=driver.find_element_by_class_name('_3Bxar').text
+                time=driver.find_element_by_class_name('_3Bxar').text            #these may need to be updated
                 txt=driver.find_element_by_class_name('_1AwDx').text#add
                 if(txt!=t):#add
                 #if(time!=t):
@@ -178,8 +178,8 @@ def bot():
                     elif(str(txt).split(' ')[0]=="get" or str(txt).split(' ')[0]=="Get" and count>0):
                         try:
                             print (str(txt).split(' ')[0])
-                            z=str(txt).split(' ')[1:][0]
-                            get(z)
+                            filename=str(txt).split(' ')[1:][0]
+                            get(filename)
                         except:
                             driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]').send_keys("couldnt find the item. or maybe file size is too large. Remember the program is case sensitive")
                             driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[3]').click()
@@ -233,7 +233,7 @@ root.minsize(200,100)
 l=Label(root,text='welcome to python bot enter your mob. no.',width='50')
 entry=Entry(root,width=50,borderwidth=5)#try
 l.grid(row=0,column=0)
-bt=Button(root,text='START',command=lambda: [bot()])
+bt=Button(root,text='START',command=lambda: [bot()]) 
 entry.grid(row=1,column=0,columnspan=5)#try
 bt.grid(row=2,column=0,columnspan=3)
 
